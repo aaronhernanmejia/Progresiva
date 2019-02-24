@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="estilos_programas.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../imagenes/mi_logo.png">
+    <script type="text/javascript" src="../jquery/dist/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="longitud.js"></script>-->
+    <title>MASA</title>
+</head>
+<body>
+        <header>
+                <img src="../imagenes/itcg.jpg" class="logo">
+                INSTITUTO TECNOLOGICO <br/> DE CIUDAD GUZMAN
+                <img src="../imagenes/icono.png" id="icono" class="icono">
+                <img src="../imagenes/icono.png" id="icono_2" class="icono">
+                <div id="menu">
+                    <P><a href="../inicio.html">MENU</a></P>
+                    <br/>
+                    <P><a href="longitud.html">LONGITUD</a></P>
+                    <br/>
+                    <P><a href="masa.html">MASA</a></P>
+                    <br/>
+                    <P><a href="tiempo.html">TIEMPO</a></P>
+                    <br/>
+                    <P> <a href="temperatura.html">TEMPERATURA</a></P>
+                </div>
+            </header>
+    <center><h2>MASA</h2></center>
+    
+    <br/>
+    
+    <div id="contenedor_selects">
+        <center>Convertir</center>
+        <br/><br/>
+       
+        <select id="a_convertir" Onchange="cambiar();" name="a_convertir" value="">  
+                <option selected="true" disabled="disabled">
+                    Unidad a convertir
+                </option>
+                <option value="pulgadas" id="opccion_1">
+                  LIBRAS
+                </option>
+                <option value="pies" id="opccion_2">
+                    TONELADAS
+                </option>
+                <option value="yardas" id="opccion_3">
+                    KILOGRAMOS
+                </option>
+                <option value="centimetros" id="opccion_4">
+                      GRAMOS
+                </option>
+            </select>
+    
+             <select id="conversion" Onchange="cambiar();" name="conversion" value="">  
+        
+                <option selected="true" disabled="disabled">
+                    Convertir a :
+                </option>
+                <option value="pulgadas" id="opccion_5">
+                    GRAMOS
+                </option>
+                <option value="pies" id="opccion_6">
+                     KILOGRAMOS
+                </option>
+                <option value="yardas" id="opccion_7">
+                    TONELADAS
+                </option>
+                <option value="centimetros" id="opccion_8">
+                    LIBRAS
+                </option>
+            </select>
+
+    <br/><br/>
+
+   <!-- <input class="botones" id="comenzar" type="submit" value="COMENZAR">-->
+
+    <br/><br/><br/>
+
+    <center> <input type="number" id="unidad"> = <input type="number"  disabled="disabled"  id="resultado"> </center>
+
+    <br/><br/><br/>
+
+    <input  class="botones" type="button" value="CALCULAR" id="calcular">
+
+    <div id="mensajes"> <div id="mensaje"> </div>   <div id="mensaje_2"> </div> </div><!--cierra mensajes-->
+
+    
+                                   
+    <footer>
+        TODOS LOS DERECHOS RESERVADOS
+    </footer>
+    
+       <script type="text/javascript">
+            
+            var icono=document.querySelector("#icono"); //GUARDO AL ELEMENTO ICONO EN UNA VARIABLE
+            var icono_2=document.querySelector("#icono_2"); //GUARDO AL ELEMENTO ICONO_2 EN UNA VARIABLE
+            icono.addEventListener("click",muestrame,false); //AL DAR CLIC EN EL ICONO ME LLEVA A LA FUNCION MUESTRAME
+            icono_2.addEventListener("click",ocultame,false); //AL DAR CLIC EN EL ICONO_2 ME LLEVA A LA FUNCION OCULTAME
+
+            //FUNCION MUESTRAME
+             function muestrame(){
+                icono.style.display="none"; //ME OCULTA EL ELENTO ICONO
+                icono_2.style.display="block"; //ME MUESTRA EL ELEMENTO ICONO
+                menu.style.display="block"; // ME MUESTRA EL MENU
+            }
+            
+            //FUNCION OCULTAME
+            function ocultame(){
+                icono.style.display="block"; //MUESTRA ICONO
+                icono_2.style.display="none"; //OCULTA ICONO_2
+                menu.style.display="none"; //ME OCULTA EL MENU
+            }
+
+            function cambiar(){
+                 var a_convertir=document.querySelector("#a_convertir"); //Me guarda el elemento a_convertir en una variable
+                var valor_a_convertir=a_convertir.options[a_convertir.selectedIndex].text; //Obtengo el texto de las opcciones
+                
+                //ESTOS IF FUNCIONAN PARA AÑADIR EL TIPO DE CONVERSION QUE SE REALIZARA EN DOS MENSAJES (DIVS)
+                if(valor_a_convertir=="LIBRAS"){                
+                    document.querySelector("#mensaje").innerHTML="Inserta las Libras";
+                }else if(valor_a_convertir=="TONELADAS"){
+                    document.querySelector("#mensaje").innerHTML="Inserta las Toneladas";
+                }else if(valor_a_convertir=="KILOGRAMOS"){
+                    document.querySelector("#mensaje").innerHTML="Inserta los Kilogramos";
+                }else if(valor_a_convertir=="GRAMOS"){
+                    document.querySelector("#mensaje").innerHTML="Inserta los Gramos";
+                }
+
+                var conversion=document.querySelector("#conversion"); //Me guarda el elemento a_convertir en una variable
+                var valor_conversion=conversion.options[conversion.selectedIndex].text; //Obtengo el texto de las opcciones
+                
+                //ESTOS IF FUNCIONAN PARA AÑADIR EL TIPO DE CONVERSION QUE SE REALIZARA EN DOS MENSAJES (DIVS)
+                if(valor_conversion=="GRAMOS"){
+                    document.querySelector("#mensaje_2").innerHTML="Gramos";
+                 }else if(valor_conversion=="KILOGRAMOS"){
+                    document.querySelector("#mensaje_2").innerHTML="Kilogramos";
+                }else if(valor_conversion=="TONELADAS"){
+                    document.querySelector("#mensaje_2").innerHTML="Toneladas";
+                }else if(valor_conversion=="LIBRAS"){
+                    document.querySelector("#mensaje_2").innerHTML="Libras";
+                }
+
+                var calculos=document.querySelector("#calcular");// ME GUARDA EL ELEMENTO CALCULAR EN UNA VARIABLE
+                calculos.addEventListener("click",calcular,false);//AL DAR CLIC EN EL ELEMENTO CALCULAR ME MANDA A LA FUNCION CALCULAR
+                
+            //FUNCION CALCULAR (CALCULOS PARA CONVERTIR UNIDADES)
+            function calcular(){
+                if((valor_a_convertir=='LIBRAS') && (valor_conversion=='GRAMOS')){
+                    var libras_gramos;
+                    libras_gramos=(unidad.value*453.592);
+                    resultado.style.background="white";
+                    resultado.value=libras_gramos;
+                  }else if((valor_a_convertir=='LIBRAS') && (valor_conversion=='KILOGRAMOS')){
+                    var libras_kilogramos;
+                    libras_kilogramos=(unidad.value/2.205);
+                    resultado.style.background="white";
+                    resultado.value=libras_kilogramos;
+                  }else if((valor_a_convertir=='LIBRAS') && (valor_conversion=='TONELADAS')){
+                    var libras_toneladas;
+                    libras_toneladas=(unidad.value/2204.623);
+                    resultado.style.background="white";
+                    resultado.value=libras_toneladas;
+                  }else if((valor_a_convertir=='LIBRAS') && (valor_conversion=='LIBRAS')){
+                    var libras_libras;
+                    libras_libras=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=libras_libras;
+                  }else if((valor_a_convertir=='TONELADAS') && (valor_conversion=='GRAMOS')){
+                    var toneladas_gramos;
+                    toneladas_gramos=(unidad.value*1000000);
+                    resultado.style.background="white";
+                    resultado.value=toneladas_gramos;
+                  }else if((valor_a_convertir=='TONELADAS') && (valor_conversion=='KILOGRAMOS')){
+                    var toneladas_kilogramos;
+                    toneladas_kilogramos=(unidad.value*1000);
+                    resultado.style.background="white";
+                    resultado.value=toneladas_kilogramos;
+                  }else if((valor_a_convertir=='TONELADAS') && (valor_conversion=='LIBRAS')){
+                    var toneladas_libras;
+                    toneladas_libras=(unidad.value*2204.623);
+                    resultado.style.background="white";
+                    resultado.value=toneladas_libras;
+                    }else if((valor_a_convertir=='TONELADAS') && (valor_conversion=='TONELADAS')){
+                    var toneladas_libras;
+                    toneladas_libras=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=toneladas_libras;
+                  }else if((valor_a_convertir=='KILOGRAMOS') && (valor_conversion=='GRAMOS')){
+                    var kilogramos_gramos;
+                    kilogramos_gramos=(unidad.value*1000);
+                    resultado.style.background="white";
+                    resultado.value=kilogramos_gramos;
+                  }else if((valor_a_convertir=='KILOGRAMOS') && (valor_conversion=='KILOGRAMOS')){
+                    var kilogramos_kilogramos;
+                    kilogramos_kilogramos=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=kilogramos_kilogramos;
+                  }else if((valor_a_convertir=='KILOGRAMOS') && (valor_conversion=='TONELADAS')){
+                    var kilogramos_toneladas;
+                  kilogramos_toneladas=(unidad.value/1000);
+                    resultado.style.background="white";
+                    resultado.value=kilogramos_toneladas;
+                  }else if((valor_a_convertir=='KILOGRAMOS') && (valor_conversion=='LIBRAS')){
+                    var kilogramos_libras;
+                    kilogramos_libras=(unidad.value*2.20462);
+                    resultado.style.background="white";
+                    resultado.value=kilogramos_libras;
+                  }else if((valor_a_convertir=='GRAMOS') && (valor_conversion=='GRAMOS')){
+                    var gramos_gramos;
+                    gramos_gramos=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=gramos_gramos;
+                  }else if((valor_a_convertir=='GRAMOS') && (valor_conversion=='KILOGRAMOS')){
+                    var gramos_kilogramos;
+                    gramos_kilogramos=(unidad.value/1000);
+                    resultado.style.background="white";
+                    resultado.value=gramos_kilogramos;
+                  }else if((valor_a_convertir=='GRAMOS') && (valor_conversion=='TONELADAS')){
+                    var gramos_toneladas;
+                    gramos_toneladas=(unidad.value*-6);
+                    resultado.style.background="white";
+                    resultado.value=gramos_toneladas;
+                  }else if((valor_a_convertir=='GRAMOS') && (valor_conversion=='LIBRAS')){
+                    var gramos_libras;
+                    gramos_libras=(unidad.value/453.592);
+                    resultado.style.background="white";
+                    resultado.value=gramos_libras;
+                  }
+            }
+        
+        }
+        </script>
+        <!-- <script src="script.js"></script>-->
+</body>
+</html>

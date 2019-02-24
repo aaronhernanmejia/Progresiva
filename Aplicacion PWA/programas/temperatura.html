@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="estilos_programas.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../imagenes/mi_logo.png">
+    <script type="text/javascript" src="../jquery/dist/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="longitud.js"></script>-->
+    <title>TEMPERATURA</title>
+</head>
+<body>
+    <header>
+            <img src="../imagenes/itcg.jpg" class="logo">
+            INSTITUTO TECNOLOGICO <br/> DE CIUDAD GUZMAN
+            <img src="../imagenes/icono.png" id="icono" class="icono">
+            <img src="../imagenes/icono.png" id="icono_2" class="icono">
+            <div id="menu">
+                <P><a href="../inicio.html">MENU</a></P>
+                <br/>
+                <P><a href="longitud.html">LONGITUD</a></P>
+                <br/>
+                <P><a href="masa.html">MASA</a></P>
+                <br/>
+                <P><a href="tiempo.html">TIEMPO</a></P>
+                <br/>
+                <P> <a href="temperatura.html">TEMPERATURA</a></P>
+            </div>
+        </header>
+    <center><h2>TEMPERATURA</h2></center>
+    
+    <br/>
+    
+    <div id="contenedor_selects">
+        <center>Convertir</center>
+        <br/><br/>
+
+        <select id="a_convertir" Onchange="cambiar();" name="a_convertir" value="">  
+                <option selected="true" disabled="disabled">
+                    Unidad a convertir
+                </option>
+                <option value="pulgadas" id="opccion_1">
+                  CELCIUS
+                </option>
+                <option value="pies" id="opccion_2">
+                    KELVIN
+                </option>
+                <option value="yardas" id="opccion_3">
+                    FAHRENHEIT
+                </option>
+            </select>
+    
+             <select id="conversion" Onchange="cambiar();" name="conversion" value="">  
+        
+                <option selected="true" disabled="disabled">
+                    Convertir a :
+                </option>
+                <option value="pulgadas" id="opccion_4">
+                     FAHRENHEIT
+                </option>
+                <option value="pies" id="opccion_5">
+                     CELCIUS
+                </option>
+                <option value="yardas" id="opccion_6">
+                    KELVIN
+                </option>
+            </select>
+
+    <br/><br/>
+
+   <!-- <input class="botones" id="comenzar" type="submit" value="COMENZAR">-->
+
+    <br/><br/><br/>
+
+    <center> <input type="number" id="unidad"> = <input type="number"  disabled="disabled" id="resultado"> </center>
+
+    <br/><br/><br/>
+
+    <input  class="botones" type="button" value="CALCULAR" id="calcular">
+
+    <div id="mensajes"> <div id="mensaje"> </div>   <div id="mensaje_2"> </div> </div><!--cierra mensajes-->
+
+    
+                                   
+    <footer>
+        TODOS LOS DERECHOS RESERVADOS
+    </footer>
+    
+    <script type="text/javascript">
+            
+        var icono=document.querySelector("#icono"); //GUARDO AL ELEMENTO ICONO EN UNA VARIABLE
+        var icono_2=document.querySelector("#icono_2"); //GUARDO AL ELEMENTO ICONO_2 EN UNA VARIABLE
+        icono.addEventListener("click",muestrame,false); //AL DAR CLIC EN EL ICONO ME LLEVA A LA FUNCION MUESTRAME
+        icono_2.addEventListener("click",ocultame,false); //AL DAR CLIC EN EL ICONO_2 ME LLEVA A LA FUNCION OCULTAME
+
+        //FUNCION MUESTRAME
+         function muestrame(){
+            icono.style.display="none"; //ME OCULTA EL ELENTO ICONO
+            icono_2.style.display="block"; //ME MUESTRA EL ELEMENTO ICONO
+            menu.style.display="block"; // ME MUESTRA EL MENU
+        }
+        
+        //FUNCION OCULTAME
+        function ocultame(){
+            icono.style.display="block"; //MUESTRA ICONO
+            icono_2.style.display="none"; //OCULTA ICONO_2
+            menu.style.display="none"; //ME OCULTA EL MENU
+        }
+
+        function cambiar(){
+             var a_convertir=document.querySelector("#a_convertir"); //Me guarda el elemento a_convertir en una variable
+            var valor_a_convertir=a_convertir.options[a_convertir.selectedIndex].text; //Obtengo el texto de las opcciones
+            
+            //ESTOS IF FUNCIONAN PARA AÑADIR EL TIPO DE CONVERSION QUE SE REALIZARA EN DOS MENSAJES (DIVS)
+            if(valor_a_convertir=="CELCIUS"){                
+                document.querySelector("#mensaje").innerHTML="Inserta Celcius";
+            }else if(valor_a_convertir=="FAHRENHEIT"){
+                document.querySelector("#mensaje").innerHTML="Inserta Fahrenheit";
+            }else if(valor_a_convertir=="KELVIN"){
+                document.querySelector("#mensaje").innerHTML="Inserta Kelvin";
+            }
+
+            var conversion=document.querySelector("#conversion"); //Me guarda el elemento a_convertir en una variable
+            var valor_conversion=conversion.options[conversion.selectedIndex].text; //Obtengo el texto de las opcciones
+            
+            //ESTOS IF FUNCIONAN PARA AÑADIR EL TIPO DE CONVERSION QUE SE REALIZARA EN DOS MENSAJES (DIVS)
+            if(valor_conversion=="CELCIUS"){
+                document.querySelector("#mensaje_2").innerHTML="Celcius";
+             }else if(valor_conversion=="FAHRENHEIT"){
+                document.querySelector("#mensaje_2").innerHTML="Fahrenheit";
+            }else if(valor_conversion=="KELVIN"){
+                document.querySelector("#mensaje_2").innerHTML="Kelvin";
+            }
+
+            var calculos=document.querySelector("#calcular");// ME GUARDA EL ELEMENTO CALCULAR EN UNA VARIABLE
+            calculos.addEventListener("click",calcular,false);//AL DAR CLIC EN EL ELEMENTO CALCULAR ME MANDA A LA FUNCION CALCULAR
+            
+        
+
+            function calcular(){
+                if((valor_a_convertir=='CELCIUS') && (valor_conversion=='FAHRENHEIT')){
+                    var celcius_fahrenheit;
+                    celcius_fahrenheit=(unidad.value*9/5)+32;
+                    resultado.style.background="white";
+                    resultado.value=celcius_fahrenheit;
+                  }else if((valor_a_convertir=='CELCIUS') && (valor_conversion=='KELVIN')){
+                    var celcius_kelvin;
+                    celcius_kelvin=(unidad.value*1)+273.15;
+                    resultado.style.background="white";
+                    resultado.value=celcius_kelvin;
+                  }else if((valor_a_convertir=='CELCIUS') && (valor_conversion=='CELCIUS')){
+                    var celcius_celcius;
+                    celcius_celcius=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=celcius_celcius;
+                  }else if((valor_a_convertir=='KELVIN') && (valor_conversion=='FAHRENHEIT')){
+                    var kelvin_fahrenheit;
+                    kelvin_fahrenheit=(unidad.value-273.15)*9/5+32;
+                    resultado.style.background="white";
+                    resultado.value=kelvin_fahrenheit;
+                  }else if((valor_a_convertir=='KELVIN') && (valor_conversion=='KELVIN')){
+                    var kelvin_kelvin;
+                    kelvin_kelvin=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=kelvin_kelvin;
+                  }else if((valor_a_convertir=='KELVIN') && (valor_conversion=='CELCIUS')){
+                    var kelvin_celcius;
+                    kelvin_celcius=(unidad.value-273.15);
+                    resultado.style.background="white";
+                    resultado.value=kelvin_celcius;
+                  }else if((valor_a_convertir=='FAHRENHEIT') && (valor_conversion=='FAHRENHEIT')){
+                    var fahrenheit_fahrenheit;
+                    fahrenheit_fahrenheit=(unidad.value*1);
+                    resultado.style.background="white";
+                    resultado.value=fahrenheit_fahrenheit;
+                  }else if((valor_a_convertir=='FAHRENHEIT') && (valor_conversion=='KELVIN')){
+                    var fahrenheit_kelvin;
+                    fahrenheit_kelvin=(unidad.value-32)*5/9+273.15;
+                    resultado.style.background="white";
+                    resultado.value=fahrenheit_kelvin;
+                  }else if((valor_a_convertir=='FAHRENHEIT') && (valor_conversion=='CELCIUS')){
+                    var fahrenheit_celcius;
+                    fahrenheit_celcius=(unidad.value-32)*5/9;
+                    resultado.style.background="white";
+                    resultado.value=fahrenheit_celcius;
+                 }
+            }
+        }
+        </script>
+        <!-- <script src="script.js"></script>-->
+</body>
+</html>
